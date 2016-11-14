@@ -477,7 +477,7 @@
                     <!--                    <ui:insert name="body"/>                   -->
                     <h:panelGroup id="myPanel" layout="block">
                         <!--Crear-->
-        <p:dialog id="CourseCreateDlg" widgetVar="CourseCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
+            <p:dialog id="CourseCreateDlg" widgetVar="CourseCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
             <h:form id="CourseCreateForm">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Codigo" for="code" />
@@ -574,39 +574,34 @@
                             </p:outputPanel>
                         </p:dialog>
         
-        <h:form id="UserTableForm">
-                            <p:dataTable id="dataList" var="user" value="#{editController.user1}"  selectionMode="single" selection="#{editController.selectedCar}" rowKey="#{userController.name}" widgetVar="dataTable" emptyMessage="No existe" filteredValue="" style="display:block; font: serif; font-size: 8px;  "
-                                         class="form-height" reflow="true" rows="5" paginator="true">
+        <h:form id="CourseTableForm">
+                            <p:dataTable id="dataList" var="course" value="#{courseView.courses}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" >
 
                                 <f:facet name="header" >
                                     <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
                                     <p:columnToggler datasource="dataList" trigger="toggler" />
                                     <h:outputText value="Cursos"/>
                                 </f:facet>
-                                <p:column headerText="Codigo" sortBy="" filterBy=""   filterMatchMode="contains" style=" height: 2%;">
-                                    <h:outputText value="" />
-                                </p:column>
-
-                                <p:column headerText="Cuatrimeste" sortBy="" filterBy="}"   filterMatchMode="contains">
-                                    <h:outputText value="" />
-                                </p:column>
-
-                                <p:column headerText="Nombre" sortBy="" filterBy=""   filterMatchMode="contains" >
-                                    <h:outputText value="" />
-                                </p:column>
-
-                                <p:column headerText="Año" sortBy="" filterBy=""  filterMatchMode="contains">
-
-                                    <h:outputText id="Role" value="" />
-                                </p:column>
-
-                                <p:column headerText="Profesor" sortBy="" filterBy="}"   filterMatchMode="contains">
-                                    <h:outputText value="" />
-                                </p:column>
-
                                 
+                                <p:column headerText="Código" sortBy="#{course.code}" filterBy="#{course.code}"   filterMatchMode="contains" style=" height: 2%;">
+                                    <h:outputText value="#{course.code}" />
+                                </p:column>
 
-                               
+                                <p:column headerText="Cuatrimeste" sortBy="#{course.term}" filterBy="#{course.term}"   filterMatchMode="contains">
+                                    <h:outputText value="#{course.term}" />
+                                </p:column>
+
+                                <p:column headerText="Nombre" sortBy="#{course.name}" filterBy="#{course.name}"   filterMatchMode="contains" >
+                                    <h:outputText value="#{course.name}" />
+                                </p:column>
+
+                                <p:column headerText="Año" sortBy="#{course.year}" filterBy="#{course.year}"  filterMatchMode="contains">
+                                    <h:outputText value="#{course.year}" />
+                                </p:column>
+
+                                <p:column headerText="Profesor" sortBy="" filterBy=""   filterMatchMode="contains">
+                                    <h:outputText value="#{course.year}" />
+                                </p:column>
 
                                 <f:facet name="footer">
 

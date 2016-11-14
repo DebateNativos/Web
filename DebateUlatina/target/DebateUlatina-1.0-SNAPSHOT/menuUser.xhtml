@@ -9,7 +9,7 @@
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Debate</title>
+        <title>Podium</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <meta http-equiv="cache-control" content="max-age=0" />
@@ -106,7 +106,7 @@
                 <!-- Logo -->
                 <a href="menu.xhtml" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>DEB</b></span>
+                    <span class="logo-mini"><b>Podium</b></span>
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-m"><h:graphicImage library="images" name="logo.png" /></span>
                 </a>
@@ -476,48 +476,47 @@
                 <section class="content">
                     <!--                    <ui:insert name="body"/>                   -->
                     <h:panelGroup id="myPanel" layout="block">
-                        <p:dialog id="UserDlg" widgetVar="UserDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
+                        <p:dialog id="UserDlg"  widgetVar="UserDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
                             <h:form id="UserForm">
                                 <p:panelGrid columns="2">
 
                                     <p:outputLabel value="Nombre" for="firstName" />
-                                    <p:inputText id="firstName" value="#{userController.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    <p:inputText id="firstName" value="#{dialogView.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
                                     <p:outputLabel value="Primer apellido" for="lastName" />
-                                    <p:inputText id="lastName" value="#{userController.lastname}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    <p:inputText id="lastName" value="#{dialogView.lastName}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
                                     <p:outputLabel value="Segundo apellido" for="secondLastName" />
-                                    <p:inputText id="secondLastName" value="#{userController.secondLastName}" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
+                                    <p:inputText id="secondLastName" value="#{dialogView.secondLastname}" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
 
-                                    <p:outputLabel value="Fotografía" for="picture" />
-                                    <p:inputTextarea rows="4" autoResize="false" class="full-width" id="picture" value="#{userController.photo}" />
 
                                     <p:outputLabel value="Correo electrónico" for="email" />
-                                    <p:inputText id="email" value="#{userController.email}" title="#{messages.CreateStaffTitle_email}" required="true" requiredMessage="Debe ingresar la información correcta" size="50" maxlength="50"/>
+                                    <p:inputText id="email" value="#{dialogView.email}" title="#{messages.CreateStaffTitle_email}" required="true" requiredMessage="Debe ingresar la información correcta" size="50" maxlength="50"/>
 
                                     <p:outputLabel value="Dirección" for="dirección" />
-                                    <p:inputText id="dirección" value="#{userController.address}" required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    <p:inputText id="dirección" value="#{dialogView.address}" required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
-                                    <p:outputLabel value="Usuario" for="username" />
-                                    <p:inputText id="username" value="#{userController.username}" required="true" requiredMessage="Debe ingresar la información correcta" size="16" maxlength="16"/>
-
+                              
                                     <p:outputLabel for="phone" value="Teléfono:" />
-                                    <p:inputMask id="phone" value="#{userController.phone}" mask="(999) 999-9999"/>
+                                    <p:inputMask id="phone" value="#{dialogView.phone}" mask="999-9999"/>
+                                    
+                                    <p:outputLabel value="Carnet: " for="idUniversity" />
+                                    <p:password id="idUniversity" value="#{dialogView.idUniversity}" feedback="true" />
 
                                     <p:outputLabel value="Contraseña: " for="password" />
-                                    <p:password id="password" value="#{userController.password}" feedback="true" />
+                                    <p:password id="password" value="#{dialogView.password}" feedback="true" />
 
 
                                     <p:outputLabel for="Role" value="Role:" />
-                                    <p:selectOneRadio id="Role" value="#{userController.role}">
-                                        <f:selectItem itemLabel="Administrador" itemValue="1" />
-                                        <f:selectItem itemLabel="Profesor" itemValue="2" />
-                                        <f:selectItem itemLabel="Estudiante" itemValue="3" />
+                                    <p:selectOneRadio id="Role" value="#{dialogView.role}">
+                                        <f:selectItem itemLabel="Administrador" itemValue="0" />
+                                        <f:selectItem itemLabel="Profesor" itemValue="1" />
+                                        <f:selectItem itemLabel="Estudiante" itemValue="2" />
                                     </p:selectOneRadio>
 
                                     <f:facet name="footer" >
                                         <div class="footer-right">
-                                            <p:commandButton icon="fa fa-list" styleClass="btn-success" value="Agregar" />
+                                            <p:commandButton icon="fa fa-list" styleClass="btn-success" value="Agregar" actionListener="#{dialogView.newUser()}" />
                                             <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('UserDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                                         </div>
                                     </f:facet>
@@ -531,7 +530,7 @@
                                 <p:panelGrid columns="2">
 
                                     <p:outputLabel value="Nombre" for="firstName" />
-                                    <p:inputText id="firstName" value="#{editController.selectedCar.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    <p:inputText id="firstName" value=""  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
                                     <p:outputLabel value="Primer apellido" for="lastName" />
                                     <p:inputText id="lastName" value="#{editController.selectedCar.lastname}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
@@ -575,79 +574,54 @@
                             </h:form>
                         </p:dialog>
 
-                        <p:dialog header="Informacio del usuario" widgetVar="userInfoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                            <p:outputPanel id="userInfoDetail" style="text-align:center;">
-                                <p:panelGrid  columns="2" rendered="#{not empty editController.selectedCar}" columnClasses="label,value">
-                                    <f:facet name="header">
-                                        <p:graphicImage/> 
-                                    </f:facet>
-
-                                    <h:outputText value="Nombre:" />
-                                    <h:outputText value="#{editController.selectedCar.name}" />
-
-                                    <h:outputText value="Apellido" />
-                                    <h:outputText value="#{editController.selectedCar.lastname}" />
-
-                                    <h:outputText value="Segundo apellido:" />
-                                    <h:outputText value="#{editController.selectedCar.secondLastName}"/>
-
-                                    <h:outputText value="Fotografía" />
-                                    <h:outputText value="#{editController.selectedCar.photo}" />
-                                </p:panelGrid>
-                            </p:outputPanel>
-                        </p:dialog>
-
+                        
                         
                         
                         <h:form id="UserTableForm">
-                            <p:dataTable id="dataList" var="user" value="#{editController.user1}"  selectionMode="single" selection="#{editController.selectedCar}" rowKey="#{userController.name}" widgetVar="dataTable" emptyMessage="No existe" filteredValue="" style="display:block; font: serif; font-size: 8px;  "
-                                         class="form-height" reflow="true" rows="5" paginator="true">
+                            <p:growl id="msgs" showDetail="true" />
+                            
+                            <p:dataTable id="dataList" var="user" value="#{allView.user}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" paginator="true" rows="15" editable="true" >
 
+       
                                 <f:facet name="header" >
                                     <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
                                     <p:columnToggler datasource="dataList" trigger="toggler" />
                                     <h:outputText value="Usuarios"/>
                                 </f:facet>
-                                <p:column headerText="Nombre" sortBy="#{userController.name}" filterBy="#{userController.name}"   filterMatchMode="contains" style=" height: 2%;">
-                                    <h:outputText value="#{userController.name}" />
+                                
+                                <p:column headerText="Nombre" sortBy="#{user.name}" filterBy="#{user.name}" style=" height: 2%;">
+                                    <h:outputText value="#{user.name}" />
                                 </p:column>
 
-                                <p:column headerText="Apellido" sortBy="#{userController.lastname}" filterBy="#{userController.lastname}"   filterMatchMode="contains">
-                                    <h:outputText value="#{userController.lastname}" />
+                                <p:column headerText="Apellido" sortBy="#{user.lastName}" filterBy="#{user.lastName}"   >
+                                    <h:outputText value="#{user.lastName}" />
                                 </p:column>
 
-                                <p:column headerText="Segundo apellido" sortBy="#{userController.secondLastName}" filterBy="#{userController.secondLastName}"   filterMatchMode="contains" >
-                                    <h:outputText value="#{userController.secondLastName}" />
+                                <p:column headerText="Segundo apellido" sortBy="#{user.lastName2}" filterBy="#{user.lastName2}"    >
+                                    <h:outputText value="#{user.lastName2}" />
                                 </p:column>
 
-                                <p:column headerText="Rol" sortBy="#{userController.role}" filterBy="#{userController.role}"  filterMatchMode="contains">
+                                <p:column headerText="Rol" sortBy="#{service.roleSelected(user)}" filterBy="#{service.roleSelected(user)}"  >
 
-                                    <h:outputText id="Role" value="#{userController.role}" />
+                                    <h:outputText id="Role" value="#{service.roleSelected(user)}" />
                                 </p:column>
 
-                                <p:column headerText="Fotografía" sortBy="#{userController.photo}" filterBy="#{userController.photo}"   filterMatchMode="contains">
-                                    <h:outputText value="#{userController.photo}" />
+                                <p:column headerText="Correo electrónico" sortBy="#{user.email}" filterBy="#{user.email}" >
+                                    <h:outputText value="#{user.email}" />
                                 </p:column>
 
-                                <p:column headerText="Correo electrónico" sortBy="#{userController.email}" filterBy="#{userController.email}"   filterMatchMode="contains">
-                                    <h:outputText value="#{userController.email}" />
+                                <p:column headerText="Dirección" sortBy="#{user.address}" filterBy="#{user.address}"  >
+                                    <h:outputText  value="#{user.address}" />
+                                </p:column>
+                                <p:column headerText="Carnet" sortBy="#{user.idUniversity}" filterBy="#{user.idUniversity}"  >
+                                    <h:outputText  value="#{user.idUniversity}" />
+                                </p:column>
+                              
+                                <p:column  headerText="Teléfono:" sortBy="#{user.phone}" filterBy="#{user.phone}"  >
+                                    <h:outputText id="phone" value="#{user.phone}"/>
                                 </p:column>
 
-                                <p:column headerText="Dirección" sortBy="#{userController.address}" filterBy="#{userController.address}"   filterMatchMode="contains" >
-                                    <h:outputText  value="#{userController.address}" />
-                                </p:column>
-
-                                <p:column headerText="Usuario" sortBy="#{userController.username}" filterBy="#{userController.username}"  filterMatchMode="contains">
-                                    <h:outputText id="username" value="#{userController.username}"/>
-                                </p:column>
-
-                                <p:column  headerText="Teléfono:" sortBy="#{userController.phone}" filterBy="#{userController.phone}"   filterMatchMode="contains">
-                                    <h:outputText id="phone" value="#{userController.phone}"/>
-                                </p:column>
-
-                                <p:column headerText="Contraseña: " sortBy="#{userController.password}" filterBy="#{userController.password}"   filterMatchMode="contains">
-                                    <h:outputText id="password" value="#{userController.password}" />
-                                </p:column>
+                               
 
                                 <f:facet name="footer">
 
@@ -657,10 +631,32 @@
                                     <p:commandButton id="deleteButton" styleClass="btn-danger" icon="fa fa-trash"  value="Borrar"  onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()">
                                     <p:confirm header="Confirmación" message="¿Desea borrar el registro?" icon="fa fa-warning"/>
                                     </p:commandButton>
-                                    <!--<p:commandButton process="user" update=":UserTableForm:userInfoDetail" icon="ui-icon-search" value="Ver" oncomplete="PF('userInfoDialog').show()" />-->
+                                    
+                                    <!--<p:commandButton process="dataList" update=":form:userInfoDetail"  value="Ver" onclick="PF('userInfoDialog').show()" />-->
+      
                                 </f:facet>
                             </p:dataTable>
-           
+                            
+                    <p:dialog  widgetVar="userInfoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <p:outputPanel id="userInfoDetail" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty dialogView.selectedUser}" columnClasses="label,value">
+                                    <f:facet name="header">
+                                        <h3>Usuario:</h3>
+                                    </f:facet>
+
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{dialogView.selectedUser.name}" />
+
+                                    <h:outputText value="Apellido" />
+                                    <h:outputText value="#{dialogView.selectedUser.lastName}" />
+
+                                    <h:outputText value="Segundo apellido:" />
+                                    <h:outputText value="#{dialogView.selectedUser.lastName2}"/>
+
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+
             </h:form>
                     </h:panelGroup>
 
@@ -759,6 +755,7 @@
 
 
         </script>
+        
         <!-- Page Loading Effect -->
 
         <!--        <script type="text/javascript">

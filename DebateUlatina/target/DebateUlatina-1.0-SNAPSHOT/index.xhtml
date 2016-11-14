@@ -28,7 +28,7 @@
                 <b:column medium-screen="4"> </b:column>
 
                 <b:column medium-screen="4">
-                    <p:inputText placeholder="Nombre de usuario" value="#{login.username}" id="username" style="width:100%; padding: 2%;" />
+                    <p:inputText placeholder="Correo electrónico" value="#{login.email}" id="username" style="width:100%; padding: 2%;" required="true" />
 
                 </b:column>
                 <b:column medium-screen="6" style-class="message">
@@ -41,7 +41,7 @@
 
                 </b:column>
                 <b:column medium-screen="4">
-                    <p:password placeholder="Contraseña" id="password1" value="#{login.password}" style="width:100%; padding: 2%;"  />
+                    <p:password placeholder="Contraseña" id="password1" value="#{login.password}" style="width:100%; padding: 2%;" required="true"  />
 
                 </b:column>
                 <b:column medium-screen="6" styleClass="message">
@@ -64,7 +64,7 @@
             </b:row>
             <b:row>
                 <b:column span="2">
-
+                    
                 </b:column>
             </b:row>
             <b:row style="height: 80%"></b:row>

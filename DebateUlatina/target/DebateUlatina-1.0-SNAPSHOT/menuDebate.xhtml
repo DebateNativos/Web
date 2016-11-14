@@ -8,7 +8,7 @@
    <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Debate</title>
+        <title>Podium</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <meta http-equiv="cache-control" content="max-age=0" />
@@ -105,7 +105,7 @@
                 <!-- Logo -->
                 <a href="menu.xhtml" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>DEB</b></span>
+                    <span class="logo-mini"><b>PODIUM</b></span>
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-m"><h:graphicImage library="images" name="logo.png" /></span>
                 </a>
@@ -462,7 +462,7 @@
                     <h:panelGroup id="myDashBoard" class="breadcrumb">
                         <ol class="breadcrumb">
 
-                            <li><a href="menuPrincipal.xhtml">#{menuController.pageName}<i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href="menuPrincipal.xhtml"><i class="fa fa-dashboard"></i> Página principal</a></li>
 
                             <li class="active">Debate</li>
 
@@ -477,17 +477,17 @@
                     <h:panelGroup id="myPanel" layout="block">
                          
             <!-- pop up de agregar-->
-                         <!-- <p:dialog id="debateCreateDlg" widgetVar="DebateCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
+                         <p:dialog id="debateCreateDlg" widgetVar="DebateCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
                             <h:form id="UserForm">
                                 <p:panelGrid columns="2">
                                 <p:outputLabel for="popup" value="Fecha:" />
-                                <p:calendar id="popup" value="" style="width:150px;" />
+                                <p:inputText id="popup" value="" style="width:150px;" />
 
                                 <p:outputLabel for="name" value="Nombre:" />
                                 <p:inputText id="name" style="width:150px;"/>
 
                                 <p:outputLabel for="time" value="Duración:" />
-                                <p:calendar id="time" value="" pattern="HH:mm" timeOnly="true"  />
+                                <p:inputText id="time" value=""  />
 
                                 <p:outputLabel for="course" value="Curso1: " />
                                 <p:selectOneMenu id="course" value="" style="width:150px">
@@ -501,22 +501,22 @@
                                     <f:selectItems value="" />
                                 </p:selectOneMenu>
                                 <p:outputLabel for="timeP" value="Duración de la presentación:" />
-                                <p:calendar id="timeP" value="" pattern="HH:mm" timeOnly="true"  />
+                                <p:inputText id="timeP" value=""  />
                                 
                                 <p:outputLabel for="timeA1" value="Duración de la primera argumentación:" />
-                                <p:calendar id="timeA1" value="}" pattern="HH:mm" timeOnly="true"  />
+                                <p:inputText id="timeA1" value="}"  />
                                 
                                 <p:outputLabel for="timePrg" value="Duración de la etapa de preguntas:" />
-                                <p:calendar id="timePrg" value="" pattern="HH:mm" timeOnly="true"  />
+                                <p:inputText id="timePrg" value="" />
                                 
                                 <p:outputLabel for="timeA2" value="Duración de la segunda argumentación:" />
-                                <p:calendar id="timeA2" value="" pattern="HH:mm" timeOnly="true"  />
+                                <p:inputText id="timeA2" value=""  />
                                 
                                 <p:outputLabel for="timeC" value="Duración del cierre:" />
-                                <p:calendar id="timeC" value="" pattern="HH:mm" timeOnly="true"/>
+                                <p:inputText id="timeC" value="" />
                                  <f:facet name="footer" >
                                         <div class="footer-right">
-                                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar" />
+                                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Guardar" />
                                             <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('DebateCreateDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                                         </div>
                                     </f:facet>
@@ -525,7 +525,7 @@
                         </p:dialog>
         
        
-                    <p:dialog id="debateEditDlg" widgetVar="DebateEditDialog" modal="true" appendTo="@(body)" resizable="false"  header="Editar">
+                    <!-- <p:dialog id="debateEditDlg" widgetVar="DebateEditDialog" modal="true" appendTo="@(body)" resizable="false"  header="Editar">
                             <h:form id="debateEditForm">
                                 <p:panelGrid columns="2">
         
@@ -585,7 +585,7 @@
                                 <p:outputLabel for="name" value="Nombre:" />
                                 <h:outputText id="name" style="width:150px;"/>
 
-                                <p:outputLabel for="time" value="Duración:" />
+                               <!-- <p:outputLabel for="time" value="Duración:" />
                                 <h:outputText id="time" value=""  />
 
                                 <p:outputLabel for="course" value="Curso1: " />
@@ -607,15 +607,14 @@
                                 <h:outputText id="timeA2" value=""  />
                                 
                                 <p:outputLabel for="timeC" value="Duración del cierre:" />
-                                <h:outputText id="timeC" value="" />
+                                <h:outputText id="timeC" value="" />-->
                                     
                                 </p:panelGrid>
                             </p:outputPanel>
                         </p:dialog>
         
           <h:form id="UserTableForm">
-                            <p:dataTable id="dataList" var="user" value=""  selectionMode="single"  rowKey="" widgetVar="dataTableD" emptyMessage="No existe" filteredValue="" style="display:block; font: serif; font-size: 8px;  "
-                                         class="form-height" reflow="true" rows="5" paginator="true">
+              <p:dataTable id="dataList" var="debate" value="#{allView.debate}"  widgetVar="dataTableD"  style="display:block; font: serif; font-size: 8px;  ">
 
                                 <f:facet name="header" >
                                     <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
@@ -623,15 +622,15 @@
                                     <h:outputText value="Debates"/>
                                 </f:facet>
                                 
-                                <p:column headerText="Fecha" sortBy="" filterBy=""   filterMatchMode="contains" style=" height: 2%;">
-                                    <h:outputText value="" />
+                                <p:column headerText="Fecha" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains" style=" height: 2%;">
+                                    <h:outputText value="#{debate.startingDate}" />
                                 </p:column>
 
-                                <p:column headerText="Nombre" sortBy="" filterBy=""   filterMatchMode="contains">
-                                    <h:outputText value="" />
+                                <p:column headerText="Nombre" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains">
+                                    <h:outputText value="#{debate.name}" />
                                 </p:column>
 
-                                <p:column headerText="Duración" sortBy="" filterBy=""   filterMatchMode="contains" >
+                               <!-- <p:column headerText="Duración" sortBy="" filterBy=""   filterMatchMode="contains" >
                                     <h:outputText value="" />
                                 </p:column>
 
@@ -662,7 +661,7 @@
 
                                 <p:column headerText="Cierre" sortBy="" filterBy=""   filterMatchMode="contains">
                                     <h:outputText id="password" value="" />
-                                </p:column>
+                                </p:column>-->
 
                                 <f:facet name="footer">
 
