@@ -5,7 +5,7 @@ package com.podiumcr.debateulatina;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.podiumcr.podiumwebapp.data.Course;
+import com.podiumcr.jpa.entities.Course;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +55,7 @@ public class CourseService {
     public List<Course> createCourses(int size) {
         List<Course> list = new ArrayList<>();
         for(int i = 0 ; i < size ; i++) {
-            list.add(new Course(getRandomId(),getRandomCodes(), getRandomNames(), getRandomYear()));
+            
         }
          
         return list;

@@ -480,16 +480,14 @@
                          <p:dialog id="debateCreateDlg" widgetVar="DebateCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
                             <h:form id="UserForm">
                                 <p:panelGrid columns="2">
-                                <p:outputLabel for="popup" value="Fecha:" />
-                                <p:inputText id="popup" value="" style="width:150px;" />
+                                <p:outputLabel for="popup" value="Fecha del debate:" />
+                                <p:inputText id="popup" value="#{debateNew.startingDate}" style="width:150px;" />
 
-                                <p:outputLabel for="name" value="Nombre:" />
-                                <p:inputText id="name" style="width:150px;"/>
+                                <p:outputLabel for="name" value="Nombre del debate:" />
+                                <p:inputText id="name"value="#{debateNew.name}" style="width:150px;"/>
+  
 
-                                <p:outputLabel for="time" value="Duración:" />
-                                <p:inputText id="time" value=""  />
-
-                                <p:outputLabel for="course" value="Curso1: " />
+                               <!-- <p:outputLabel for="course" value="Curso1: " />
                                 <p:selectOneMenu id="course" value="" style="width:150px">
                                     <f:selectItem itemLabel="Seleccione el curso" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="" />
@@ -513,10 +511,10 @@
                                 <p:inputText id="timeA2" value=""  />
                                 
                                 <p:outputLabel for="timeC" value="Duración del cierre:" />
-                                <p:inputText id="timeC" value="" />
+                                <p:inputText id="timeC" value="" />-->
                                  <f:facet name="footer" >
                                         <div class="footer-right">
-                                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Guardar" />
+                                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Guardar" actionListener="#{debateNew.newDeb()}" />
                                             <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('DebateCreateDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                                         </div>
                                     </f:facet>

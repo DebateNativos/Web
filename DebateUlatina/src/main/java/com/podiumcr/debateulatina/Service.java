@@ -29,7 +29,7 @@ import org.primefaces.event.RowEditEvent;
  * @author Joss
  */
 @ManagedBean(name="service")
-@ViewScoped
+@ApplicationScoped
 
 public class Service {
 
@@ -56,10 +56,7 @@ public class Service {
         return dList;
     }
 
-    public List<Debate> activeDebate() {
-        List<Debate> aDList = dData.getActiveDebates();
-        return aDList;
-    }
+  
     
     public String roleSelected(User a){
         String role = null;

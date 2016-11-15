@@ -475,37 +475,34 @@
                 <!-- Main content -->
                 <section class="content">
                     <!--                    <ui:insert name="body"/>                   -->
-                    <h:panelGroup id="myPanel" layout="block">
+           <h:panelGroup id="myPanel" layout="block">
                         <!--Crear-->
             <p:dialog id="CourseCreateDlg" widgetVar="CourseCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
             <h:form id="CourseCreateForm">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Codigo" for="code" />
-                    <p:inputText id="code" value="" required="true" requiredMessage="Debes ingresar el código" size="45" maxlength="45"/>
+                    <p:inputText id="code" value="#{courseView.courseCode}" required="true" requiredMessage="Debes ingresar el código" size="45" maxlength="45"/>
 
                     <p:outputLabel value="Cuatrimestre" for="Term" />
-                    <p:inputText id="Term" value=""  required="true" requiredMessage="Ingresar el cuatrimeste actual" size="45" maxlength="45"/>
+                    <p:inputText id="Term" value="#{courseView.curseQuarter}"  required="true" requiredMessage="Ingresar el cuatrimeste actual" size="45" maxlength="45"/>
 
                     <p:outputLabel value="Nombre del curso" for="name" />
-                    <p:inputText id="name" value="" required="true" requiredMessage="Ingresar el nombre del curso"  size="50" maxlength="50"/>
+                    <p:inputText id="name" value="#{courseView.name}" required="true" requiredMessage="Ingresar el nombre del curso"  size="50" maxlength="50"/>
 
 
                     <p:outputLabel value="Año" for="year" />
-                    <p:inputText id="year" value="" required="true" requiredMessage="Ingresar el año"  size="50" maxlength="50"/>
+                    <p:inputText id="year" value="#{courseView.curseYear}" required="true" requiredMessage="Ingresar el año"  size="50" maxlength="50"/>
 
                     <p:outputLabel value="Profesor" for="profesor" />
-                    <p:selectOneMenu id="profesor" value="}"  >
+                    <p:selectOneMenu id="profesor" value="#{courseView.professor}"  >
                         <f:selectItem itemLabel="Seleccione un profesor"/>
-                        <f:selectItems value=""
-                                       var="profesorItem"
-                                       itemValue=""
-                                       itemLabel=""
-                                       />
+                        <f:selectItems value="" />
 
                     </p:selectOneMenu>
                     <f:facet name="footer" >
                         <div class="footer-right">
-                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar" />
+                            
+                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Nuevo" actionListener="#{courseView.newCourse()}" />
                             <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('CourseCreateDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                         </div>
                     </f:facet>
@@ -517,20 +514,20 @@
             <h:form id="CourseEditForm">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Codigo" for="code" />
-                    <p:inputText id="code" value="" required="true" requiredMessage="Debes ingresar el código" size="45" maxlength="45"/>
+                    <p:inputText id="code" value="#{courseView.courseCode}" required="true" requiredMessage="Debes ingresar el código" size="45" maxlength="45"/>
 
                     <p:outputLabel value="Cuatrimestre" for="Term" />
-                    <p:inputText id="Term" value=""  required="true" requiredMessage="Ingresar el cuatrimeste actual" size="45" maxlength="45"/>
+                    <p:inputText id="Term" value="#{courseView.curseQuarter}"  required="true" requiredMessage="Ingresar el cuatrimeste actual" size="45" maxlength="45"/>
 
                     <p:outputLabel value="Nombre del curso" for="name" />
-                    <p:inputText id="name" value="" required="true" requiredMessage="Ingresar el nombre del curso"  size="50" maxlength="50"/>
+                    <p:inputText id="name" value="#{courseView.name}" required="true" requiredMessage="Ingresar el nombre del curso"  size="50" maxlength="50"/>
 
 
                     <p:outputLabel value="Año" for="year" />
                     <p:inputText id="year" value="" required="true" requiredMessage="Ingresar el año"  size="50" maxlength="50"/>
 
                     <p:outputLabel value="Profesor" for="profesor" />
-                    <p:selectOneMenu id="profesor" value="}"  >
+                    <p:selectOneMenu id="profesor" value="#{courseView.professor}"  >
                         <f:selectItem itemLabel="Seleccione un profesor"/>
                         <f:selectItems value=""
                                        var="profesorItem"
@@ -541,7 +538,7 @@
                     </p:selectOneMenu>
                     <f:facet name="footer" >
                         <div class="footer-right">
-                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar" />
+                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar" actionListener="" />
                             <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                         </div>
                     </f:facet>
@@ -575,7 +572,7 @@
                         </p:dialog>
         
         <h:form id="CourseTableForm">
-                            <p:dataTable id="dataList" var="course" value="#{courseView.courses}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" >
+            <p:dataTable id="dataList" var="course" value="#{allView.course}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" >
 
                                 <f:facet name="header" >
                                     <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
@@ -583,24 +580,24 @@
                                     <h:outputText value="Cursos"/>
                                 </f:facet>
                                 
-                                <p:column headerText="Código" sortBy="#{course.code}" filterBy="#{course.code}"   filterMatchMode="contains" style=" height: 2%;">
-                                    <h:outputText value="#{course.code}" />
+                <p:column headerText="Código" sortBy="#{course.courseCode}" filterBy="#{course.courseCode}"   filterMatchMode="contains" style=" height: 2%;">
+                    <h:outputText value="#{course.courseCode}" />
                                 </p:column>
 
-                                <p:column headerText="Cuatrimeste" sortBy="#{course.term}" filterBy="#{course.term}"   filterMatchMode="contains">
-                                    <h:outputText value="#{course.term}" />
+                <p:column headerText="Cuatrimeste" sortBy="#{course.curseQuarter}" filterBy="#{course.curseQuarter}"   filterMatchMode="contains">
+                    <h:outputText value="#{course.curseQuarter}" />
                                 </p:column>
 
-                                <p:column headerText="Nombre" sortBy="#{course.name}" filterBy="#{course.name}"   filterMatchMode="contains" >
+                <p:column headerText="Nombre" sortBy="#{course.name}" filterBy="#{course.name}"   filterMatchMode="contains" >
                                     <h:outputText value="#{course.name}" />
                                 </p:column>
 
-                                <p:column headerText="Año" sortBy="#{course.year}" filterBy="#{course.year}"  filterMatchMode="contains">
-                                    <h:outputText value="#{course.year}" />
+                            <p:column headerText="Año" sortBy="#{course.curseYear}" filterBy="#{course.curseYear}"  filterMatchMode="contains">
+                                    <h:outputText value="#{course.curseYear}" />
                                 </p:column>
 
-                                <p:column headerText="Profesor" sortBy="" filterBy=""   filterMatchMode="contains">
-                                    <h:outputText value="#{course.year}" />
+                <p:column headerText="Profesor" sortBy="#{course.professor.name}" filterBy="#{course.professor.name}"   filterMatchMode="contains">
+                    <h:outputText value="#{course.professor.name}" />
                                 </p:column>
 
                                 <f:facet name="footer">
