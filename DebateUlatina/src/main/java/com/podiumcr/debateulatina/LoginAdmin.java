@@ -92,11 +92,11 @@ public class LoginAdmin implements Serializable {
             } catch (IOException ex) {
                 Logger.getLogger(LoginAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", email);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", email);
         } else {
             loggedIn = false;
             
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de logeo", "Credenciales invalidas");
         }
          
         FacesContext.getCurrentInstance().addMessage(null, message);

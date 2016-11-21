@@ -612,22 +612,27 @@
                                     <p:inputText value="#{dialogView.selectedUser.lastName}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
                                     </p:inplace>
                                     
-                                    <p:outputLabel value="Segundo apellido" for="secondLastName" />
                                     
-                                    <p:inputText id="secondLastName" value="#{dialogView.selectedUser.lastName2}" title="" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
-
+                                    <p:outputLabel value="Segundo apellido" for="secondLastName" />
+                                    <p:inplace id="secondLastName" editor="true">
+                                    <p:inputText  value="#{dialogView.selectedUser.lastName2}" title="" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
+                                    </p:inplace>
 
                                     <p:outputLabel value="Correo electrónico" for="email" />
-                                    <p:inputText id="email" value="#{dialogView.selectedUser.email}" required="true" requiredMessage="Debe ingresar la información correcta" size="50" maxlength="50"/>
-
-                                    <p:outputLabel value="Dirección" for="dirección" />
-                                    <p:inputText id="dirección" value="#{dialogView.selectedUser.address}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
-
+                                    <p:inplace id="email" editor="true">
+                                    <p:inputText  value="#{dialogView.selectedUser.email}" required="true" requiredMessage="Debe ingresar la información correcta" size="50" maxlength="50"/>
+                                    </p:inplace>
+                                    
+                                    <p:outputLabel value="Dirección" for="address" />
+                                    <p:inplace id="address" editor="true">
+                                    <p:inputText  value="#{dialogView.selectedUser.address}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    </p:inplace>
 
                                     <p:outputLabel for="phone" value="Teléfono:" />
-                                    <p:inputMask id="phone" value="#{dialogView.selectedUser.phone}" mask="(999) 999-9999"/>
-
-
+                                    <p:inplace id="phone"  editor="true">
+                                    <p:inputMask value="#{dialogView.selectedUser.phone}" mask="(999) 999-9999"/>
+                                    </p:inplace>
+                                        
                                    <p:outputLabel for="Role" value="Role:" />
                                     <p:selectOneRadio id="Role" value="">
                                         <f:selectItem itemLabel="Administrador" itemValue="1" />

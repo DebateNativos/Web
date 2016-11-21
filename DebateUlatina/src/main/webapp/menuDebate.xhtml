@@ -487,11 +487,7 @@
                                     <p:outputLabel value="Primer apellido" for="lastName" />
                                     <p:inputText id="lastName" value="#{debateNew.startingDate}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
-                                    <p:outputLabel for="type" value="Tipo de debate:" />
-                                    <p:selectOneMenu id="type" value="#{debateNew.debateType}" style="width:125px">
-                                        <f:selectItem itemLabel="Seleccione uno" itemValue="" />
-                                        <f:selectItems value="#{allView.type}" />
-                                    </p:selectOneMenu>
+                                    
 
                                     <f:facet name="footer" >
                                         <div class="footer-right">
