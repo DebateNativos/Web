@@ -4,7 +4,6 @@ com/podiumcr/debateulatina/LoginAdmin.class
 com/podiumcr/debateulatina/Service.class
 com/podiumcr/podiumwebapp/common/EntityListener.class
 com/podiumcr/podiumwebapp/ws/ActiveUserWS.class
-com/podiumcr/debateulatina/CourseService.class
 com/podiumcr/debateulatina/DebateNew.class
 com/podiumcr/podiumwebapp/data/ActiveUser.class
 com/podiumcr/debateulatina/AllView.class

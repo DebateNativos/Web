@@ -36,10 +36,11 @@ import org.primefaces.event.UnselectEvent;
 @ViewScoped
 public class AllView implements Serializable {
 private List<User> user;
-
+private List<Professor> professor;
 private List<Debate> debate;
 private List<Course> course;
 private List<DebateType> type;
+
 
     public List<Course> getCourse() {
         return course;
@@ -71,8 +72,6 @@ private List<DebateType> type;
         return user;
     }
 
-   
-
     public List<Debate> getDebate() {
         return debate;
     }
@@ -97,7 +96,34 @@ private List<DebateType> type;
         }
         return role;
 }
- 
-    
+  
+   public List<Professor> listProf(){
+      
+        for(User p : user) {
+           
+           if(p instanceof Professor){
+           professor.add((Professor) p);
+           } 
+        }
+     
+       
+               
+       return professor;
+}
+   
+   
+   
+    public String activeDebate(Debate d) {
+        String active = null;
+
+        if (d.getIsActive() == true) {
+            active = "Activo";
+        } else {
+            active = "Desactivo";
+        }
+
+        return active;
+    }
+
  
 }

@@ -503,7 +503,7 @@
                                     <p:inputMask id="phone" value="#{dialogView.phone}" mask="9999-9999"/>
 
                                     <p:outputLabel value="Carnet: " for="idUniversity" />
-                                    <p:password id="idUniversity" value="#{dialogView.idUniversity}"  />
+                                    <p:inputText id="idUniversity" value="#{dialogView.idUniversity}"  />
 
                                     <p:outputLabel value="Contraseña: " for="password" />
                                     <p:password id="password" value="#{dialogView.password}" feedback="true" />
@@ -614,9 +614,9 @@
                                     
                                     
                                     <p:outputLabel value="Segundo apellido" for="secondLastName" />
-                                    <p:inplace id="secondLastName" editor="true">
-                                    <p:inputText  value="#{dialogView.selectedUser.lastName2}" title="" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
-                                    </p:inplace>
+                                    
+                                    <p:inputText  id="secondLastName" value="#{dialogView.selectedUser.lastName2}" title="" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
+                                   
 
                                     <p:outputLabel value="Correo electrónico" for="email" />
                                     <p:inplace id="email" editor="true">
