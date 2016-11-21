@@ -477,28 +477,36 @@
                     <h:panelGroup id="myPanel" layout="block">
                          
             <!-- pop up de agregar-->
-                         <p:dialog id="debateCreateDlg" widgetVar="DebateCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
-                            <h:form id="UserForm">
-                                <p:panelGrid columns="2"> 
-                                    
-                                <!--<p:outputLabel for="popup" value="Fecha del debate:" />
-                                <p:inputText id="popup" value="#{debateNew.startingDate}" style="width:150px;" />
+             <p:dialog id="debateDlg"  widgetVar="DebateDialog" modal="true" appendTo="@(body)" resizable="false"  header="Nuevo">
+                            <h:form id="DebateForm">
+                                <p:panelGrid columns="2">
 
-                                <p:outputLabel for="name" value="Nombre del debate:" />
-                                <p:inputText id="name"value="#{debateNew.name}" style="width:150px;" />-->
- 
-                              
-                                
-                                 <f:facet name="footer" >
+                                    <p:outputLabel value="Nombre" for="name" />
+                                    <p:inputText id="name" value="#{debateNew.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+
+                                    <p:outputLabel value="Primer apellido" for="lastName" />
+                                    <p:inputText id="lastName" value="#{debateNew.startingDate}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+
+                                    <p:outputLabel for="type" value="Tipo de debate:" />
+                                    <p:selectOneMenu id="type" value="#{debateNew.debateType}" style="width:125px">
+                                        <f:selectItem itemLabel="Seleccione uno" itemValue="" />
+                                        <f:selectItems value="#{allView.type}" />
+                                    </p:selectOneMenu>
+
+                                    <f:facet name="footer" >
                                         <div class="footer-right">
-                                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Guardar" actionListener="#{debateNew.newDeb()}" />
-                                            <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('DebateCreateDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
+                                            <p:commandButton icon="fa fa-list" styleClass="btn-success" value="Agregar" actionListener="#{debateNew.newDeb()}" update=":form:msgs"  />
+                                            <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('DebateDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                                         </div>
                                     </f:facet>
                                 </p:panelGrid>
                             </h:form>
                         </p:dialog>
-        
+
+            
+            
+            
+                         
        
                     <!-- <p:dialog id="debateEditDlg" widgetVar="DebateEditDialog" modal="true" appendTo="@(body)" resizable="false"  header="Editar">
                             <h:form id="debateEditForm">
@@ -574,7 +582,7 @@
                                     <h:outputText value="Debates"/>
                                 </f:facet>
                                 
-                                <p:column headerText="Fecha" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains" style=" height: 2%;">
+                                <p:column headerText="Fecha del debate:" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains" style=" height: 2%;">
                                     <h:outputText value="#{debate.startingDate}" />
                                 </p:column>
 
@@ -582,11 +590,17 @@
                                     <h:outputText value="#{debate.name}" />
                                 </p:column>
 
-                              
+                               <p:column headerText="Activo" sortBy="" filterBy=""   filterMatchMode="contains">
+                                    <h:outputText value="" />
+                                </p:column>
+                  
+                                <p:column headerText="Type" sortBy="#{debate.debateType.name}" filterBy="#{debate.debateType.name}"   filterMatchMode="contains">
+                                    <h:outputText value="#{debate.debateType.name}" />
+                                </p:column>
 
                                 <f:facet name="footer">
 
-                                    <p:commandButton styleClass="btn-success" icon="fa fa-list"  value="Nuevo" type="button" onclick="PF('DebateCreateDialog').show();" />
+                                   <p:commandButton styleClass="btn-success" icon="fa fa-list"  value="Nuevo" type="button" onclick="PF('DebateDialog').show();" />
                                     <p:commandButton styleClass="btn-primary" icon="fa fa-pencil" value="Editar" type="button" onclick="PF('DebateEditDialog').show();" />
                                     
                                     <p:commandButton id="deleteButton" styleClass="btn-danger" icon="fa fa-trash"  value="Borrar"  onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()">

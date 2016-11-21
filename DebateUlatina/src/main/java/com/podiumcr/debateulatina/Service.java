@@ -57,19 +57,7 @@ public class Service {
     }
 
   
-    
-    public String roleSelected(User a){
-        String role = null;
-    if(a instanceof Professor){
-    role = "Profesor";
-        
-    } else if(a.getIsAdmin()== true){
-    role = "Administrador";
-    } else{
-    role = "Estudiante";
-    }
-    return role;
-}
+  
     
     
 }

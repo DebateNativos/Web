@@ -7,12 +7,15 @@ package com.podiumcr.debateulatina;
 
 import com.podiumcr.jpa.data.CourseData;
 import com.podiumcr.jpa.data.DebateData;
+import com.podiumcr.jpa.data.DebateTypeData;
 import com.podiumcr.jpa.data.UserData;
 import com.podiumcr.jpa.entities.Course;
 
 import com.podiumcr.jpa.entities.User;
 
 import com.podiumcr.jpa.entities.Debate;
+import com.podiumcr.jpa.entities.DebateType;
+import com.podiumcr.jpa.entities.Professor;
 import static com.podiumcr.podiumwebapp.common.EntityListener.em;
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +39,7 @@ private List<User> user;
 
 private List<Debate> debate;
 private List<Course> course;
+private List<DebateType> type;
 
     public List<Course> getCourse() {
         return course;
@@ -46,12 +50,13 @@ private List<Course> course;
     }
 
 
- private User selectedUser;
+
 
  
    DebateData dDta = new DebateData(em);
    UserData data = new UserData(em);
    CourseData cData = new CourseData(em);  
+   DebateTypeData typedata = new DebateTypeData(em);
 
 
 @PostConstruct
@@ -59,6 +64,7 @@ private List<Course> course;
         user = data.getUsers();      
         debate = dDta.getDebates();
         course = cData.getAll();
+        type = typedata.getAll();
     }
 
     public List<User> getUser() {
@@ -71,23 +77,27 @@ private List<Course> course;
         return debate;
     }
 
-
-       public User getSelectedUser() {
-        return selectedUser;
+    public List<DebateType> getType() {
+        return type;
     }
 
-    public void setSelectedUser(User selectedUser) {
-        this.selectedUser = selectedUser;
+    public void setType(List<DebateType> type) {
+        this.type = type;
     }
-    
-  public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Car Selected", ((User) event.getObject()).getEmail());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+
+  public String roleSelected(User a) {
+        String role = null;
+        if (a instanceof Professor) {
+            role = "Profesor";
+
+        } else if (a.getIsAdmin() == true) {
+            role = "Administrador";
+        } else {
+            role = "Estudiante";
+        }
+        return role;
+}
  
-    public void onRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("Car Unselected", ((User) event.getObject()).getEmail());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+    
  
 }

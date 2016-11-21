@@ -38,6 +38,7 @@ public class DebateNew implements Serializable{
     private Date startingDate;
     private boolean isActive;
     
+    
     private Debate selectedDebate; 
     
     DebateData dData = new DebateData(em);
@@ -113,22 +114,21 @@ public class DebateNew implements Serializable{
         this.selectedDebate = selectedDebate;
     }
     
-    public void newDeb(){
-    Debate newDebate = null;
-    
-    createdDate = Calendar.getInstance().getTime();
-    
-    if(startingDate == Calendar.getInstance().getTime()){
-    isActive = true;
-    
-    }else {
-    isActive = false;
-    }
-    debateType = new DebateType("Debates basados en el comportamiento australiano...","Modelo australiano" );
-    newDebate = new Debate(name, createdDate, debateType, startingDate, isActive);
-    dData.persistDebate(newDebate);
- 
-       RequestContext.getCurrentInstance().closeDialog("El debate ha sido registrado");
+    public void newDeb() {
+        Debate newDebate = null;
+
+        createdDate = Calendar.getInstance().getTime();
+
+        if (startingDate == createdDate) {
+            isActive = true;
+        } else {
+            isActive = false;
+        }
+        debateType = new DebateType("Debates basados en el comportamiento australiano...", "Modelo australiano");
+        newDebate = new Debate(name, createdDate, debateType, startingDate, isActive);
+        dData.persistDebate(newDebate);
+
+        RequestContext.getCurrentInstance().closeDialog("El debate ha sido registrado");
     }
     
     

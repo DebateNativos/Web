@@ -11,16 +11,13 @@ import com.podiumcr.jpa.entities.User;
 import static com.podiumcr.podiumwebapp.common.EntityListener.em;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import java.io.Serializable;
-import java.util.List;
-import org.primefaces.event.RowEditEvent;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
+import org.primefaces.event.CellEditEvent;
+
+
 /**
  *
  * @author Joss
@@ -181,14 +178,57 @@ public class UserView implements Serializable {
        
       RequestContext.getCurrentInstance().closeDialog(newUser);
     }
+    public void editUser1(){
+     
+     User editUser = null;
+       switch (role) {
+           case 0:
+               selectedUser.setName(name);
+               selectedUser.setEmail(email);
+               selectedUser.setPassword(password);
+               selectedUser.setAddress(address);
+               selectedUser.setLastName(lastName);
+               selectedUser.setLastName2(lastName);
+               selectedUser.setIdUniversity(idUniversity);
+               selectedUser.setAdmin(true);
+               selectedUser.setPhone(phone);
+               break;
+           case 1:
+               editUser = new Professor(selectedUser.getEmail(),selectedUser.getPassword(), selectedUser.getAddress(),selectedUser.getName(),selectedUser.getLastName(), selectedUser.getLastName2(),selectedUser.getIdUniversity(),selectedUser.getPhone());
+               break;
+           case 2:
+              editUser = new User(selectedUser.getEmail(),selectedUser.getPassword(), selectedUser.getAddress(),selectedUser.getName(),selectedUser.getLastName(), selectedUser.getLastName2(),selectedUser.getIdUniversity(),false,selectedUser.getPhone());
+               break;
+       }
+       //cambiar este metodo por uno de editar y enviar el id user
+       user.registerUser(selectedUser);
+       
+      RequestContext.getCurrentInstance().closeDialog(editUser);
+    }
 
-    public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Usuario", ((User) event.getObject()).getName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+    //Terminar
+  public void deleteUser() {
+     
+        //user.remove(selectedUser);
+        selectedUser = null;
     }
- 
-    public void onRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("No usuario", ((User) event.getObject()).getName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+  
+  //Informar
+  public void penalty(){
+      
+      
+  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El usuario: " + selectedUser.getName() + " "+ selectedUser.getLastName()+" ha sido sancionado"));
+  
+  }
+  
+      public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+         
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
+
 }

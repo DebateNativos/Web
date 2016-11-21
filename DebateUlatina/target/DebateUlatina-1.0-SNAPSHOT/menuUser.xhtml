@@ -485,6 +485,7 @@
                                     <p:inputText id="firstName" value="#{dialogView.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
                                     <p:outputLabel value="Primer apellido" for="lastName" />
+                                    
                                     <p:inputText id="lastName" value="#{dialogView.lastName}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
                                     <p:outputLabel value="Segundo apellido" for="secondLastName" />
@@ -497,10 +498,10 @@
                                     <p:outputLabel value="Dirección" for="dirección" />
                                     <p:inputText id="dirección" value="#{dialogView.address}" required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
-                              
+
                                     <p:outputLabel for="phone" value="Teléfono:" />
                                     <p:inputMask id="phone" value="#{dialogView.phone}" mask="9999-9999"/>
-                                    
+
                                     <p:outputLabel value="Carnet: " for="idUniversity" />
                                     <p:password id="idUniversity" value="#{dialogView.idUniversity}"  />
 
@@ -525,45 +526,8 @@
                             </h:form>
                         </p:dialog>
 
-                        
-                        <p:dialog header="Editar" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
-                 <p:outputPanel id="userDetail" style="text-align:center;">
-                     <p:panelGrid  columns="2" rendered="#{not empty dialogView.selectedUser}" columnClasses="label,value">
-                <f:facet name="header">
-                    <h1 > #{dialogView.selectedUser.idUniversity}</h1>
-                </f:facet>
-                                    <p:outputLabel value="Nombre" for="firstName" />
-                                    <p:inputText id="firstName" value="#{dialogView.selectedUser.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
 
-                                    <p:outputLabel value="Primer apellido" for="lastName" />
-                                    <p:inputText id="lastName" value="#{dialogView.selectedUser.lastName}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
-
-                                    <p:outputLabel value="Segundo apellido" for="secondLastName" />
-                                    <p:inputText id="secondLastName" value="#{dialogView.selectedUser.lastName2}" title="" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
-
-                                    
-                                    <p:outputLabel value="Correo electrónico" for="email" />
-                                    <p:inputText id="email" value="#{dialogView.selectedUser.email}" required="true" requiredMessage="Debe ingresar la información correcta" size="50" maxlength="50"/>
-
-                                    <p:outputLabel value="Dirección" for="dirección" />
-                                    <p:inputText id="dirección" value="#{dialogView.selectedUser.address}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
-
-                                  
-                                    <p:outputLabel for="phone" value="Teléfono:" />
-                                    <p:inputMask id="phone" value="#{dialogView.selectedUser.phone}" mask="(999) 999-9999"/>
-
-                                  
-                                    <!--<p:outputLabel for="Role" value="Role:" />
-                                    <p:selectOneRadio id="Role" value="#{editController.selectedCar.role}">
-                                        <f:selectItem itemLabel="Administrador" itemValue="1" />
-                                        <f:selectItem itemLabel="Profesor" itemValue="2" />
-                                        <f:selectItem itemLabel="Estudiante" itemValue="3" />
-                                    </p:selectOneRadio>-->
-
-                
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
+                      
                         
 
                         
@@ -573,7 +537,7 @@
                        <p:growl id="msgs" showDetail="true" />
                             
                        
-                       <p:dataTable id="dataList" var="user" value="#{allView.user}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" paginator="true" rows="15" editable="true" rowKey="#{user.idUsers}" selection="#{selectedUser}" selectionMode="single" >
+                       <p:dataTable id="dataList" var="user" value="#{allView.user}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" paginator="true" rows="10" editable="true" selectionMode="single" selection="#{dialogView.selectedUser}" rowKey="#{user.idUniversity}"  >
 
        
                                 <f:facet name="header" >
@@ -581,7 +545,7 @@
                                     <p:columnToggler datasource="dataList" trigger="toggler" />
                                     <h:outputText value="Usuarios"/>
                                 </f:facet>
-                                
+
                                 <p:column headerText="Nombre" sortBy="#{user.name}" filterBy="#{user.name}" style=" height: 2%;">
                                     <h:outputText value="#{user.name}" />
                                 </p:column>
@@ -594,9 +558,9 @@
                                     <h:outputText value="#{user.lastName2}" />
                                 </p:column>
 
-                                <p:column headerText="Rol" sortBy="#{service.roleSelected(user)}" filterBy="#{service.roleSelected(user)}"  >
+                                <p:column headerText="Rol" sortBy="#{allView.roleSelected(user)}" filterBy="#{service.roleSelected(user)}"  >
 
-                                    <h:outputText id="Role" value="#{service.roleSelected(user)}" />
+                                    <h:outputText id="Role" value="#{allView.roleSelected(user)}" />
                                 </p:column>
 
                                 <p:column headerText="Correo electrónico" sortBy="#{user.email}" filterBy="#{user.email}" >
@@ -618,18 +582,68 @@
 
                                 <f:facet name="footer">
 
-                                    <p:commandButton styleClass="btn-success" icon="fa fa-list"  value="Nuevo" type="button" onclick="PF('UserDialog').show();" />
-                                    <p:commandButton styleClass="btn-primary" icon="fa fa-pencil" value="Editar" type="button" onclick="PF('EditDialog').show();" />
-                                    
-                                    <p:commandButton id="deleteButton" styleClass="btn-warming" icon="fa fa-trash"  value="Borrar"  onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()">
-                                    <p:confirm header="Confirmación" message="¿Desea borrar el registro?" icon="fa fa-warning"/>
+                                    <p:commandButton styleClass="btn-success" icon="fa fa-list"  value="Nuevo" type="button" onclick="PF('UserDialog').show()" />
+                                    <p:commandButton styleClass="btn-primary" icon="fa fa-pencil"  process="dataList" update=":form:editDetail" value="Editar" oncomplete="PF('editDialog').show()" />
+                                     
+                                   
+                                    <p:commandButton id="deleteButton" styleClass="btn-warning" icon="fa fa-trash"  value="Borrar" actionListener="#{dialogView.deleteUser()}"  onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()">
+                                    <p:confirm header="Confirmación" message="¿Desea borrar el registro?" icon="fa fa-warning" />
                                     </p:commandButton>
-                                    <p:commandButton styleClass="btn-danger" icon="fa fa-pencil" value="Sancionar" type="button" />
-                                    <p:commandButton process="dataList" update=":form:userInfoDetail"  value="Ver" onclick="PF('userInfoDialog').show()" />
-      
+                                    <p:commandButton styleClass="btn-danger" icon="fa fa-pencil" value="Sancionar" type="button" actionListener="#{dialogView.penalty()}"/>
+                               
+   
                                 </f:facet>
                             </p:dataTable>
-                            
+                       
+                              <p:dialog header="Editar" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
+                            <p:outputPanel id="editDetail" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty dialogView.selectedUser}">
+                                    <f:facet name="header">
+                                        <h1 >#{dialogView.selectedUser.name}</h1>
+                                    </f:facet>
+                                    <p:outputLabel value="Nombre" for="firstName" />
+                                    <p:inplace id="firstName" editor="true">
+                                    <p:inputText  value="#{dialogView.selectedUser.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    </p:inplace>
+                                    
+                                    
+                                    <p:outputLabel value="Primer apellido" for="lastName" />
+                                    <p:inplace id="lastName" editor="true">
+                                    <p:inputText value="#{dialogView.selectedUser.lastName}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                    </p:inplace>
+                                    
+                                    <p:outputLabel value="Segundo apellido" for="secondLastName" />
+                                    
+                                    <p:inputText id="secondLastName" value="#{dialogView.selectedUser.lastName2}" title="" required="true" requiredMessage="Debe ingresar la información correcta"  size="45" maxlength="45"/>
+
+
+                                    <p:outputLabel value="Correo electrónico" for="email" />
+                                    <p:inputText id="email" value="#{dialogView.selectedUser.email}" required="true" requiredMessage="Debe ingresar la información correcta" size="50" maxlength="50"/>
+
+                                    <p:outputLabel value="Dirección" for="dirección" />
+                                    <p:inputText id="dirección" value="#{dialogView.selectedUser.address}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+
+
+                                    <p:outputLabel for="phone" value="Teléfono:" />
+                                    <p:inputMask id="phone" value="#{dialogView.selectedUser.phone}" mask="(999) 999-9999"/>
+
+
+                                   <p:outputLabel for="Role" value="Role:" />
+                                    <p:selectOneRadio id="Role" value="">
+                                        <f:selectItem itemLabel="Administrador" itemValue="1" />
+                                        <f:selectItem itemLabel="Profesor" itemValue="2" />
+                                        <f:selectItem itemLabel="Estudiante" itemValue="3" />
+                                    </p:selectOneRadio>
+
+                                    <f:facet name="footer" >
+                                        <div class="footer-right">
+                                            <p:commandButton icon="fa fa-list" styleClass="btn-success" value="Agregar" actionListener="#{dialogView.editUser1()}" update=":form:msgs"  />
+                                            <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('editDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
+                                        </div>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
                        
                        <p:dialog header="Ver" widgetVar="userInfoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                             <p:outputPanel id="userInfoDetail" style="text-align:center;">
