@@ -499,113 +499,46 @@
                             </h:form>
                         </p:dialog>
 
-            
-            
-            
-                         
-       
-                    <!-- <p:dialog id="debateEditDlg" widgetVar="DebateEditDialog" modal="true" appendTo="@(body)" resizable="false"  header="Editar">
-                            <h:form id="debateEditForm">
-                                <p:panelGrid columns="2">
         
-                                <p:outputLabel for="popup" value="Fecha:" />
-                                <p:calendar id="popup" value="" style="width:150px;" />
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" />
 
-                                <p:outputLabel for="name" value="Nombre:" />
-                                <p:inputText id="name" style="width:150px;"/>
+                <p:dataTable id="dataList" var="debate" value="#{allView.debate}" widgetVar="dataTable" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  paginator="true" rows="10" editable="true" selectionMode="single" selection="#{debateNew.selectedDebate}" rowKey="#{debate.startingDate}"  >
 
-                                <p:outputLabel for="time" value="Duración:" />
-                                <p:calendar id="time" value="" pattern="HH:mm" timeOnly="true"  />
+                    <f:facet name="header" >
+                        <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
+                        <p:columnToggler datasource="dataList" trigger="toggler" />
+                        <h:outputText value="Debates"/>
+                    </f:facet>
 
-                                <p:outputLabel for="course" value="Curso1: " />
-                                <p:selectOneMenu id="course" value="" style="width:150px">
-                                    <f:selectItem itemLabel="Seleccione el curso" itemValue="" noSelectionOption="true" />
-                                    <f:selectItems value="" />
-                                </p:selectOneMenu>
+                    <p:column headerText="Fecha del debate:" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains" style=" height: 2%;">
+                        <h:outputText value="#{debate.startingDate}" />
+                    </p:column>
 
-                                <p:outputLabel for="course1" value="Curso2: " />
-                                <p:selectOneMenu id="course1" value="" style="width:150px">
-                                    <f:selectItem itemLabel="Seleccione el curso" itemValue="" noSelectionOption="true" />
-                                    <f:selectItems value="" />
-                                </p:selectOneMenu>
-                                <p:outputLabel for="timeP" value="Duración de la presentación:" />
-                                <p:calendar id="timeP" value="" pattern="HH:mm" timeOnly="true"  />
-                                
-                                <p:outputLabel for="timeA1" value="Duración de la primera argumentación:" />
-                                <p:calendar id="timeA1" value="" pattern="HH:mm" timeOnly="true"  />
-                                
-                                <p:outputLabel for="timePrg" value="Duración de la etapa de preguntas:" />
-                                <p:calendar id="timePrg" value="" pattern="HH:mm" timeOnly="true"  />
-                                
-                                <p:outputLabel for="timeA2" value="Duración de la segunda argumentación:" />
-                                <p:calendar id="timeA2" value="" pattern="HH:mm" timeOnly="true"  />
-                                
-                                <p:outputLabel for="timeC" value="Duración del cierre:" />
-                                <p:calendar id="timeC" value="" pattern="HH:mm" timeOnly="true"/>
-           
-                                <f:facet name="footer" >
-                                        <div class="footer-right">
-                                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar" />
-                                            <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('DebateEditDialog').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
-                                        </div>
-                                    </f:facet>
-                                </p:panelGrid>
-                            </h:form>
-                        </p:dialog>-->
-                       
-         
-                        <p:dialog header="Informacio del debate" widgetVar="DebateInfoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
-                            <p:outputPanel id="DebateInfoDetail" style="text-align:center;">
-                                <p:panelGrid  columns="2" rendered="" columnClasses="label,value">
-                                
-                                 <p:outputLabel for="popup" value="Fecha:" />
-                                <h:outputText id="popup" value="" style="width:150px;" />
+                    <p:column headerText="Nombre" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains">
+                        <h:outputText value="#{debate.name}" />
+                    </p:column>
 
-                                <p:outputLabel for="name" value="Nombre:" />
-                                <h:outputText id="name" style="width:150px;"/>
+                    <p:column headerText="Activo" sortBy="" filterBy=""   filterMatchMode="contains">
+                        <h:outputText value="" />
+                    </p:column>
 
-                           
-                                </p:panelGrid>
-                            </p:outputPanel>
-                        </p:dialog>
-        
-          <h:form id="UserTableForm">
-              <p:dataTable id="dataList" var="debate" value="#{allView.debate}"  widgetVar="dataTableD"  style="display:block; font: serif; font-size: 8px;  " editable="true" rowKey="#{debate.idDebates}" selection="#{selectedDebate}" selectionMode="single" >
+                    <p:column headerText="Type" sortBy="#{debate.debateType.name}" filterBy="#{debate.debateType.name}"   filterMatchMode="contains">
+                        <h:outputText value="#{debate.debateType.name}" />
+                    </p:column>
 
-                                <f:facet name="header" >
-                                    <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
-                                    <p:columnToggler datasource="dataList" trigger="toggler" />
-                                    <h:outputText value="Debates"/>
-                                </f:facet>
-                                
-                                <p:column headerText="Fecha del debate:" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains" style=" height: 2%;">
-                                    <h:outputText value="#{debate.startingDate}" />
-                                </p:column>
+                    <f:facet name="footer">
 
-                                <p:column headerText="Nombre" sortBy="#{debate.startingDate}" filterBy="#{debate.startingDate}"   filterMatchMode="contains">
-                                    <h:outputText value="#{debate.name}" />
-                                </p:column>
+                        <p:commandButton styleClass="btn-success" icon="fa fa-list"  value="Nuevo" type="button" onclick="PF('DebateDialog').show();" />
+                        <p:commandButton styleClass="btn-primary" icon="fa fa-pencil" value="Editar" type="button" onclick="PF('DebateEditDialog').show();" />
 
-                               <p:column headerText="Activo" sortBy="" filterBy=""   filterMatchMode="contains">
-                                    <h:outputText value="" />
-                                </p:column>
-                  
-                                <p:column headerText="Type" sortBy="#{debate.debateType.name}" filterBy="#{debate.debateType.name}"   filterMatchMode="contains">
-                                    <h:outputText value="#{debate.debateType.name}" />
-                                </p:column>
+                        <p:commandButton id="deleteButton" styleClass="btn-danger" icon="fa fa-trash"  value="Borrar"  onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()">
+                            <p:confirm header="Confirmación" message="¿Desea borrar el registro?" icon="fa fa-warning"/>
+                        </p:commandButton>
+                        <!--<p:commandButton process="user" update=":UserTableForm:userInfoDetail" icon="ui-icon-search" value="Ver" oncomplete="PF('userInfoDialog').show()" />-->
+                    </f:facet>
+                </p:dataTable>
 
-                                <f:facet name="footer">
-
-                                   <p:commandButton styleClass="btn-success" icon="fa fa-list"  value="Nuevo" type="button" onclick="PF('DebateDialog').show();" />
-                                    <p:commandButton styleClass="btn-primary" icon="fa fa-pencil" value="Editar" type="button" onclick="PF('DebateEditDialog').show();" />
-                                    
-                                    <p:commandButton id="deleteButton" styleClass="btn-danger" icon="fa fa-trash"  value="Borrar"  onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()">
-                                    <p:confirm header="Confirmación" message="¿Desea borrar el registro?" icon="fa fa-warning"/>
-                                    </p:commandButton>
-                                    <!--<p:commandButton process="user" update=":UserTableForm:userInfoDetail" icon="ui-icon-search" value="Ver" oncomplete="PF('userInfoDialog').show()" />-->
-                                </f:facet>
-                            </p:dataTable>
-           
             </h:form>
         
         

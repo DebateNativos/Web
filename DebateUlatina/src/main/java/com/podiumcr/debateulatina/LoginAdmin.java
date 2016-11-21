@@ -96,7 +96,7 @@ public class LoginAdmin implements Serializable {
         } else {
             loggedIn = false;
             
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de logeo", "Credenciales invalidas");
+            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Credenciales inválidas");
         }
          
         FacesContext.getCurrentInstance().addMessage(null, message);

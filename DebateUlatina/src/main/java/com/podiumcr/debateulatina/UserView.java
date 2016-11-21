@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 import org.primefaces.context.RequestContext;
 import java.io.Serializable;
+import javax.faces.context.ExternalContext;
 import org.primefaces.event.CellEditEvent;
 
 
@@ -216,8 +217,11 @@ public class UserView implements Serializable {
   //Informar
   public void penalty(){
       
+     
+        FacesMessage message = null;
+        message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia","El usuario: " + selectedUser.getName() + " "+ selectedUser.getLastName()+" ha sido sancionado");
       
-  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "El usuario: " + selectedUser.getName() + " "+ selectedUser.getLastName()+" ha sido sancionado"));
+ 
   
   }
   

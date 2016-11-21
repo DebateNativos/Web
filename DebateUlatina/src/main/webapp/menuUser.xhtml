@@ -650,25 +650,7 @@
                             </p:outputPanel>
                         </p:dialog>
                        
-                       <p:dialog header="Ver" widgetVar="userInfoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                            <p:outputPanel id="userInfoDetail" style="text-align:center;">
-                                <p:panelGrid  columns="2" rendered="#{not empty dialogView.selectedUser}" columnClasses="label,value">
-                                    <f:facet name="header">
-                                        <h3>Usuario:</h3>
-                                    </f:facet>
-
-                                    <h:outputText value="Nombre:" />
-                                    <h:outputText value="#{dialogView.selectedUser.name}" />
-
-                                    <h:outputText value="Apellido" />
-                                    <h:outputText value="#{dialogView.selectedUser.lastName}" />
-
-                                    <h:outputText value="Segundo apellido:" />
-                                    <h:outputText value="#{dialogView.selectedUser.lastName2}"/>
-
-                                </p:panelGrid>
-                            </p:outputPanel>
-                        </p:dialog>
+                   
 
             </h:form>
                     </h:panelGroup>

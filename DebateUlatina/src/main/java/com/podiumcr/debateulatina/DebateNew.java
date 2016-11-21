@@ -124,8 +124,7 @@ public class DebateNew implements Serializable{
         } else {
             isActive = false;
         }
-        debateType = new DebateType("Debates basados en el comportamiento australiano...", "Modelo australiano");
-        newDebate = new Debate(name, createdDate, debateType, startingDate, isActive);
+       
         dData.persistDebate(newDebate);
 
         RequestContext.getCurrentInstance().closeDialog("El debate ha sido registrado");
