@@ -538,7 +538,7 @@
                     </p:selectOneMenu>
                     <f:facet name="footer" >
                         <div class="footer-right">
-                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar" actionListener="" />
+                            <p:commandButton icon="fa fa-pencil" styleClass="btn-success" value="Editar"  />
                             <p:commandButton icon="fa fa-close" styleClass="btn-danger" value="Cancelar" onclick="PF('').hide()" immediate="true" onstart="PF('Loading').show()" onsuccess="PF('Loading').hide()"/>
                         </div>
                     </f:facet>
@@ -572,7 +572,7 @@
                         </p:dialog>
         
         <h:form id="CourseTableForm">
-            <p:dataTable id="dataList" var="course" value="#{allView.course}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe"  widgetVar="dataTable" >
+            <p:dataTable id="dataList" var="course" value="#{allView.course}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe" widgetVar="dataTable" >
 
                                 <f:facet name="header" >
                                     <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />

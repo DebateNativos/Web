@@ -14,6 +14,7 @@ import static com.podiumcr.podiumwebapp.common.EntityListener.em;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import static javassist.CtMethod.ConstParameter.string;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
@@ -28,12 +29,16 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class DebateNew implements Serializable{
     
-    
+    private String id;
+
+   
     private String name;
     private Date createdDate;
     private DebateType debateType;
     private Date startingDate;
     private boolean isActive;
+    
+    private Debate selectedDebate; 
     
     DebateData dData = new DebateData(em);
     
@@ -92,7 +97,21 @@ public class DebateNew implements Serializable{
         this.isActive = isActive;
     }
     
-    
+     public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Debate getSelectedDebate() {
+        return selectedDebate;
+    }
+
+    public void setSelectedDebate(Debate selectedDebate) {
+        this.selectedDebate = selectedDebate;
+    }
     
     public void newDeb(){
     Debate newDebate = null;
@@ -111,5 +130,6 @@ public class DebateNew implements Serializable{
  
        RequestContext.getCurrentInstance().closeDialog("El debate ha sido registrado");
     }
+    
     
 }

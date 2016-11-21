@@ -19,6 +19,8 @@ import org.primefaces.context.RequestContext;
 import java.io.Serializable;
 import java.util.List;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 /**
  *
  * @author Joss
@@ -26,7 +28,7 @@ import org.primefaces.event.RowEditEvent;
 @Named(value = "dialogView")
 @SessionScoped
 public class UserView implements Serializable {
-
+   int id;
    String email;
    String password;
    String name;
@@ -161,7 +163,7 @@ public class UserView implements Serializable {
     
     
     
-    public void newUser(){
+    public void newUser1(){
      User newUser = null;
        switch (role) {
            case 0:
@@ -177,8 +179,16 @@ public class UserView implements Serializable {
        
        user.registerUser(newUser);
        
-       RequestContext.getCurrentInstance().closeDialog("El usuario ha sido registrado");
+      RequestContext.getCurrentInstance().closeDialog(newUser);
     }
 
-    
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Usuario", ((User) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("No usuario", ((User) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 }
