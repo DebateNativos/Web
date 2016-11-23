@@ -133,10 +133,7 @@ public class DebateNew implements Serializable{
     public void setDate(String date) {
         this.date = date;
     }
-    
-    
-    
-    
+
     public void newDeb() {
         Debate newDebate = null;
         createdDate = Calendar.getInstance().getTime();

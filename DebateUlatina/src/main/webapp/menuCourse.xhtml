@@ -486,10 +486,10 @@
 
                     
                     <p:outputLabel value="Cuatrimestre" for="Term" />
-                    <p:inputText id="Term" value="#{newCourseView.curseQuarter}"  required="true" requiredMessage="Ingresar el cuatrimeste actual" size="45" maxlength="45"/>
+                    <p:inputText id="Term" type="number" value="#{newCourseView.curseQuarter}"  required="true" requiredMessage="Ingresar el cuatrimeste actual" size="45" maxlength="45"/>
 
                     <p:outputLabel value="Año" for="year" />
-                    <p:inputText id="year" value="#{newCourseView.curseYear}" required="true" requiredMessage="Ingresar el año"  size="50" maxlength="50"/>
+                    <p:inputMask id="year"  value="#{newCourseView.curseYear}" required="true" requiredMessage="Ingresar el año"  size="50" maxlength="50" mask=""/>
 
                    
                     <f:facet name="footer" >
@@ -507,7 +507,7 @@
         
         <h:form id="form">
                        <p:growl id="msgs" showDetail="true" />
-                       <p:dataTable id="dataList" var="course" value="#{allView.course}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe" widgetVar="dataTable" paginator="true" rows="10" editable="true" selectionMode="single" selection="#{newCourseView.selectedCourse}" rowKey="#{course.name}"   >
+                       <p:dataTable id="dataList" var="course" value="#{allView.course}" style="display:block; font: serif; font-size: 8px;" emptyMessage="No existe" widgetVar="dataTable" paginator="true" rows="10" editable="true" selectionMode="single" selection="#{newCourseView.selectedCourse}" rowKey="#{course.courseCode}"   >
 
                                 <f:facet name="header" >
                                     <p:commandButton id="toggler" type="button"  icon="ui-icon-calculator" style="float:right; width: 10px; height: 10px;" class="btn-primary"  />
@@ -551,15 +551,14 @@
            
                    
               <p:dialog header="Editar" widgetVar="EditDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
-                           <p:outputPanel id="editDetail" style="text-align:center;">
+                           <p:outputPanel id="editDetail" style="text-align:center">
                                <p:panelGrid  columns="2" rendered="#{newCourseView.selectedCourse}">
                                    <f:facet name="header">
                                        <h1>#{newCourseView.selectedCourse.name}</h1>
                                    </f:facet>
                                    
-                                   <p:outputLabel value="Nombre" for="name" />
-
-                                        <p:inputText value="#{newCourseView.selectedCourse.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
+                                   <p:outputLabel value="Nombre" for="name1" />
+                                   <p:inputText id="name1" value="#{newCourseView.selectedCourse.name}"  required="true" requiredMessage="Debe ingresar la información correcta" size="45" maxlength="45"/>
                                     
                                    
                                    <f:facet name="footer" >
